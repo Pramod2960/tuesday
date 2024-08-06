@@ -5,6 +5,8 @@ import bcrypt from "bcrypt";
 export async function handleSignupPage(req, res) {
   try {
     const body = req.body;
+
+    //hashpassword
     const hashedPassword = await bcrypt.hash(body.password, 10);
 
     const result = await User.create({
