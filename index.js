@@ -17,6 +17,7 @@ connect_db();
 //middlewares
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(cookieParser());
 
 //routes
