@@ -1,6 +1,6 @@
 import { User } from "../model/auth.js";
 import { setUser } from "../jwt-service.js";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 export async function handleSignupPage(req, res) {
   try {
