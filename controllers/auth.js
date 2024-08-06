@@ -44,7 +44,12 @@ export async function handleLoginPage(req, res) {
 
     // If the password matches, proceed with jwt operations
     const token = setUser(user);
-    res.cookie("uid", token, { maxAge: 3600000, httpOnly: true });
+    res.cookie("uid", token, {
+      maxAge: 3600000,
+      httpOnly: true,
+      sameSite: "None",
+      secure: true,
+    });
     console.log("cookie has been generated ", token);
 
     //routing
