@@ -55,3 +55,7 @@ export async function handleLoginPage(req, res) {
     res.status(400).end();
   }
 }
+
+export async function handleGetLogin(req, res) {
+  res.status(200).send("hello from login page").end();
+}
