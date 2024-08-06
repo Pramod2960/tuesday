@@ -8,3 +8,8 @@ export const restrictToLoggedinUserOnly = (req, res, next) => {
   req.user = user;
   next();
 };
+
+export const config = {
+  runtime: "edge",
+  unstable_allowDynamic: ["**/node_modules/lodash/**/*.js"],
+};
