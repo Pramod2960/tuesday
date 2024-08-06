@@ -2,6 +2,7 @@ import express from "express";
 import env from "dotenv/config";
 import cookieParser from "cookie-parser";
 import connect_db from "./model/db.js";
+import cors from "cors";
 
 import auth from "./routes/auth.js";
 import board from "./routes/board.js";
@@ -14,6 +15,7 @@ const app = express();
 connect_db();
 
 //middlewares
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
