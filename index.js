@@ -15,7 +15,12 @@ const app = express();
 connect_db();
 
 //middlewares
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000", //frontent
+    credentials: true, //Allow cookies
+  })
+);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());

@@ -19,14 +19,18 @@ export async function createTask(req, res) {
 
 export async function getAllTask(req, res) {
   try {
-    const data = await Task.find({
-      email: req.user.email,
-    });
+    const email = req.user.email;
     console.log(req.user.email);
-    res.status(201).send(data);
+    if (!email) {
+      return res.status(400).json({ error: "user not found" });
+    }
+    const data = await Task.find({
+      email,
+    });
+    return res.status(200).json(data);
   } catch (error) {
     console.log("error in find the Task for this particular user", error);
-    res.status(400).end();
+    return res.status(400).json({ error: "Error fetching tasks" });
   }
 }
 
@@ -45,6 +49,23 @@ export async function editTask(req, res) {
       title: req.body.title,
     });
     res.status(200).json(update);
+  } catch (error) {
+    return res.status(400).json({ status: error });
+  }
+}
+
+export async function editStatus(req, res) {
+  try {
+    console.log(req.body.status);
+
+    const update = await Task.findByIdAndUpdate(
+      req.params.id,
+      {
+        status: req.body.status,
+      },
+      { new: true }
+    );
+    return res.status(200).json(update);
   } catch (error) {
     return res.status(400).json({ status: error });
   }

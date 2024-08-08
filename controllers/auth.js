@@ -33,7 +33,7 @@ export async function handleLoginPage(req, res) {
     console.log(user);
 
     if (!user) {
-      res.status(400).send({ msg: "user not found" });
+      return res.status(400).json({ msg: "user not found" });
     }
 
     //compare provided password with hased password
@@ -45,7 +45,7 @@ export async function handleLoginPage(req, res) {
     // If the password matches, proceed with jwt operations
     const token = setUser(user);
     res.cookie("uid", token, {
-      maxAge: 3600000,
+      maxAge: 3600000, //1 hour
       httpOnly: true,
       sameSite: "None",
       secure: true,
@@ -53,14 +53,11 @@ export async function handleLoginPage(req, res) {
     console.log("cookie has been generated ", token);
 
     //routing
-    res.status(200).send({ msg: "User has logged in" });
+    return res.status(200).json({ msg: "User has logged in" });
   } catch (error) {
-    res.send({ msg: "Something went wrong please check console" });
-    console.log("error in find the user", error);
-    res.status(400).end();
+    console.error("Error in login:", error);
+    return res
+      .status(500)
+      .json({ msg: "Something went wrong, please check the console" });
   }
-}
-
-export async function handleGetLogin(req, res) {
-  res.status(200).send("hello from login page").end();
 }
