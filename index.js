@@ -22,12 +22,14 @@ app.use(
   })
 );
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(express.json()); //body size defined
 app.use(cookieParser());
 
 //routes
 app.use("/auth", auth);
 app.use("/board", restrictToLoggedinUserOnly, board);
+
+//Todo : add global error handlers
 
 //listening
 const port = process.env.PORT || 8000;

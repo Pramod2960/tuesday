@@ -18,3 +18,5 @@ const getUser = (token) => {
   }
 };
 export { setUser, getUser };
+
+//add expiry inside the JWT rather than cookies

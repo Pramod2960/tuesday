@@ -7,7 +7,7 @@ const taskSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      default: "not-started",
+      default: "to-do",
       require: true,
     },
     dueDate: {
